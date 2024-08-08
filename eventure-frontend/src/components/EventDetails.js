@@ -1,17 +1,23 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import { useParams } from "react-router-dom";
+import axios from "axios";
 import "./EventDetails.css";
 
 const EventDetails = () => {
-  // Mock event data, replace with actual data fetching logic
-  const event = {
-    eventName: "Conference on Web Development",
-    eventDate: "2024-02-15",
-    location: "Techville Convention Center",
-    description:
-      "This conference will cover various aspects of web development...",
-    organiser: "User 2",
-    participants: ["John Doe", "Jane Smith", "Alex Johnson"],
-  };
+  const { eventId } = useParams();
+  const [event, setEvent] = useState(null);
+
+  useEffect(() => {
+    // Fetch event details
+    axios
+      .get(`/api/events/${eventId}`)
+      .then((response) => setEvent(response.data))
+      .catch((error) => console.error("Error fetching event details:", error));
+  }, [eventId]);
+
+  if (!event) {
+    return <div>Loading...</div>;
+  }
 
   return (
     <div className="event-details-container">
@@ -29,11 +35,11 @@ const EventDetails = () => {
         <div className="event-section">
           <div className="event-info">
             <label>Event Name:</label>
-            <div>{event.eventName}</div>
+            <div>{event.event_name}</div>
           </div>
           <div className="event-info">
             <label>Event Date:</label>
-            <div>{event.eventDate}</div>
+            <div>{event.event_date}</div>
           </div>
           <div className="event-info">
             <label>Location:</label>
@@ -41,7 +47,7 @@ const EventDetails = () => {
           </div>
           <div className="event-info">
             <label>Description:</label>
-            <div>{event.description}</div>
+            <div>{event.event_description}</div>
           </div>
           <div className="event-info">
             <label>Event Responsible:</label>
@@ -49,7 +55,9 @@ const EventDetails = () => {
           </div>
           <div className="event-info">
             <label>Participants:</label>
-            <div>{event.participants.join(", ")}</div>
+            <div>
+              {event.participants.map((p) => p.participant_id).join(", ")}
+            </div>
           </div>
           <div className="event-info">
             <button className="button">Edit Event</button>

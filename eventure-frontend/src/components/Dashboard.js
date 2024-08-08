@@ -1,7 +1,25 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
+import axios from "axios";
 import "./Dashboard.css";
 
 const Dashboard = () => {
+  const [events, setEvents] = useState([]);
+  const [tasks, setTasks] = useState([]);
+
+  useEffect(() => {
+    // Fetch upcoming events
+    axios
+      .get("/api/events/upcoming")
+      .then((response) => setEvents(response.data))
+      .catch((error) => console.error("Error fetching events:", error));
+
+    // Fetch tasks for the user
+    axios
+      .get("/api/tasks/user")
+      .then((response) => setTasks(response.data))
+      .catch((error) => console.error("Error fetching tasks:", error));
+  }, []);
+
   return (
     <div className="dashboard-container">
       <div className="navbar">
@@ -18,17 +36,27 @@ const Dashboard = () => {
         </div>
         <div className="dashboard-section">
           <h2>Upcoming Events</h2>
-          <p>Event 1: Conference on Web Development - Date: 2024-02-15</p>
-          <p>Event 2: Tech Networking Meetup - Date: 2024-03-05</p>
+          {events.length > 0 ? (
+            events.map((event) => (
+              <p key={event._id}>
+                Event: {event.event_name} - Date: {event.event_date}
+              </p>
+            ))
+          ) : (
+            <p>No upcoming events</p>
+          )}
         </div>
         <div className="dashboard-section">
           <h2>Your Tasks</h2>
-          <div className="task-item">
-            Task 1: Prepare presentation for the conference
-          </div>
-          <div className="task-item">
-            Task 2: Coordinate with tech meetup speakers
-          </div>
+          {tasks.length > 0 ? (
+            tasks.map((task) => (
+              <div key={task._id} className="task-item">
+                {task.title}: {task.description}
+              </div>
+            ))
+          ) : (
+            <p>No tasks assigned</p>
+          )}
         </div>
       </div>
     </div>
