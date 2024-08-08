@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
+import { useParams, Link } from "react-router-dom";
 import axios from "axios";
 import "./EventDetails.css";
 
@@ -8,7 +8,6 @@ const EventDetails = () => {
   const [event, setEvent] = useState(null);
 
   useEffect(() => {
-    // Fetch event details
     axios
       .get(`/api/events/${eventId}`)
       .then((response) => setEvent(response.data))
@@ -22,11 +21,11 @@ const EventDetails = () => {
   return (
     <div className="event-details-container">
       <div className="navbar">
-        <a href="#">Home</a>
-        <a href="#">Events</a>
-        <a href="#">Tasks</a>
-        <a href="#">Profile</a>
-        <a href="#">Logout</a>
+        <Link to="/">Home</Link>
+        <Link to="/dashboard">Events</Link>
+        <Link to="/create-task">Tasks</Link>
+        <Link to="/profile">Profile</Link>
+        <Link to="/login">Logout</Link>
       </div>
       <div className="container">
         <div className="event-header">

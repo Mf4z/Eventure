@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import axios from "axios";
 import "./TaskCreate.css";
 
@@ -12,13 +13,11 @@ const TaskCreate = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    // Fetch events
     axios
       .get("/api/events")
       .then((response) => setEvents(response.data))
       .catch((error) => console.error("Error fetching events:", error));
 
-    // Fetch users for assignee
     axios
       .get("/api/users")
       .then((response) => setUsers(response.data))
@@ -36,12 +35,10 @@ const TaskCreate = () => {
       task_status: "in progress",
       date_assigned: new Date().toISOString().split("T")[0],
     };
-    // Save the new task
     axios
       .post("/api/tasks", newTask)
       .then((response) => {
         console.log("Task created:", response.data);
-        // Reset form
         setRelatedEvent("");
         setTaskTitle("");
         setTaskDescription("");
@@ -54,11 +51,11 @@ const TaskCreate = () => {
   return (
     <div className="task-create-container">
       <div className="navbar">
-        <a href="#">Home</a>
-        <a href="#">Events</a>
-        <a href="#">Tasks</a>
-        <a href="#">Profile</a>
-        <a href="#">Logout</a>
+        <Link to="/">Home</Link>
+        <Link to="/dashboard">Events</Link>
+        <Link to="/create-task">Tasks</Link>
+        <Link to="/profile">Profile</Link>
+        <Link to="/login">Logout</Link>
       </div>
       <div className="container">
         <div className="form-header">
@@ -119,7 +116,7 @@ const TaskCreate = () => {
                 required
               >
                 {users.map((user) => (
-                  <option key={user.user_id} value={user.user_id}>
+                  <option key={user._id} value={user._id}>
                     {user.name}
                   </option>
                 ))}

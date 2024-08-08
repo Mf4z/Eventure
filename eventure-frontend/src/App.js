@@ -5,16 +5,20 @@ import Dashboard from "./components/Dashboard";
 import EventCreate from "./components/EventCreate";
 import EventDetails from "./components/EventDetails";
 import TaskCreate from "./components/TaskCreate";
+import Profile from "./pages/Profile";
+import Login from "./pages/Login";
 
 const App = () => {
   return (
     <Router>
       <Routes>
         <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/dashboard" element={<Dashboard />} />
         <Route path="/create-event" element={<EventCreate />} />
-        <Route path="/event-details" element={<EventDetails />} />
+        <Route path="/event-details/:eventId" element={<EventDetails />} />
         <Route path="/create-task" element={<TaskCreate />} />
+        <Route path="/profile" element={<Profile />} />
       </Routes>
     </Router>
   );

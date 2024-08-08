@@ -10,7 +10,7 @@ const Home = () => {
         <Link to="/dashboard">Events</Link>
         <Link to="/create-task">Tasks</Link>
         <Link to="/profile">Profile</Link>
-        <Link to="/logout">Logout</Link>
+        <Link to="/login">Logout</Link>
       </div>
       <header className="home-header">
         <h1>Welcome to Eventure</h1>
