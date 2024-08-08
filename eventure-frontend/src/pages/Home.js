@@ -1,17 +1,32 @@
 import React from "react";
 import { Link } from "react-router-dom";
+import "./Home.css";
 
 const Home = () => {
   return (
-    <div>
-      <h1>Welcome to Eventure</h1>
-      <nav>
+    <div className="home-container">
+      <div className="navbar">
+        <Link to="/">Home</Link>
+        <Link to="/dashboard">Events</Link>
+        <Link to="/create-task">Tasks</Link>
+        <Link to="/profile">Profile</Link>
+        <Link to="/logout">Logout</Link>
+      </div>
+      <header className="home-header">
+        <h1>Welcome to Eventure</h1>
+        <p>Your one-stop solution for event management</p>
+      </header>
+      <nav className="home-nav">
         <ul>
           <li>
-            <Link to="/dashboard">Dashboard</Link>
+            <Link to="/dashboard" className="nav-link">
+              Dashboard
+            </Link>
           </li>
           <li>
-            <Link to="/create-event">Create Event</Link>
+            <Link to="/create-event" className="nav-link">
+              Create Event
+            </Link>
           </li>
         </ul>
       </nav>

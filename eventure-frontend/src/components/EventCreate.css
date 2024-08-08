@@ -1,0 +1,62 @@
+.event-create-container {
+  padding: 20px;
+}
+
+.navbar {
+  background-color: #333;
+  color: white;
+  padding: 10px;
+  text-align: center;
+}
+
+.navbar a {
+  color: white;
+  margin: 0 10px;
+  text-decoration: none;
+}
+
+.container {
+  width: 80%;
+  margin: auto;
+  overflow: hidden;
+}
+
+.form-header {
+  padding: 20px 0;
+  text-align: center;
+}
+
+.form-section {
+  background: white;
+  padding: 20px;
+  margin-top: 20px;
+}
+
+.form-field {
+  margin-bottom: 15px;
+}
+
+.form-field label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+.form-field input[type="text"],
+.form-field input[type="date"],
+.form-field textarea,
+.form-field select {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+  border-radius: 4px;
+  border: 1px solid #ddd;
+}
+
+.button {
+  padding: 10px 20px;
+  background-color: #008CBA;
+  color: white;
+  border: none;
+  border-radius: 4px;
+  cursor: pointer;
+}

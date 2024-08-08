@@ -1,0 +1,37 @@
+.home-container {
+    text-align: center;
+    padding: 50px;
+  }
+  
+  .navbar {
+    background-color: #333;
+    color: white;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .navbar a {
+    color: white;
+    margin: 0 10px;
+    text-decoration: none;
+  }
+  
+  .home-header {
+    margin-bottom: 30px;
+  }
+  
+  .home-nav ul {
+    list-style-type: none;
+    padding: 0;
+  }
+  
+  .home-nav li {
+    display: inline;
+    margin: 0 15px;
+  }
+  
+  .nav-link {
+    text-decoration: none;
+    color: #007bff;
+  }
+  
