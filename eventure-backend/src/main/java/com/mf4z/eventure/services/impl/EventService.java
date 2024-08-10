@@ -2,6 +2,8 @@ package com.mf4z.eventure.services.impl;
 
 import com.mf4z.eventure.datamodel.Event;
 import com.mf4z.eventure.repository.EventRepository;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -10,6 +12,9 @@ import java.util.Optional;
 
 @Service
 public class EventService {
+
+    private static final Logger logger = LoggerFactory.getLogger(EventService.class);
+
     @Autowired
     private EventRepository eventRepository;
 

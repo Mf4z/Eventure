@@ -2,6 +2,8 @@ package com.mf4z.eventure.controller;
 
 import com.mf4z.eventure.datamodel.Event;
 import com.mf4z.eventure.services.impl.EventService;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -12,6 +14,8 @@ import java.util.Optional;
 @RestController
 @RequestMapping("/api/events")
 public class EventController {
+
+    private static final Logger logger = LoggerFactory.getLogger(EventController.class);
 
     @Autowired
     private EventService eventService;
