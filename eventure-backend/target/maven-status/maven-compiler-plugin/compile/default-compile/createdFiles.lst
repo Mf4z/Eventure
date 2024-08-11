@@ -1,0 +1,16 @@
+org/example/Main.class
+com/mf4z/eventure/services/impl/DataService.class
+com/mf4z/eventure/datamodel/Participant.class
+com/mf4z/eventure/controller/EventController.class
+com/mf4z/eventure/app/messages/EventDTO.class
+com/mf4z/eventure/conf/ApplicationConfiguration.class
+com/mf4z/eventure/services/api/IEventDAO.class
+com/mf4z/eventure/services/impl/ParticipantService.class
+com/mf4z/eventure/repository/ParticipantRepository.class
+com/mf4z/eventure/controller/ParticipantController.class
+com/mf4z/eventure/services/impl/EventService.class
+com/mf4z/eventure/EventureApplication.class
+com/mf4z/eventure/app/messages/EventDTO$ParticipantDTO.class
+com/mf4z/eventure/datamodel/Event.class
+com/mf4z/eventure/datamodel/Event$Participant.class
+com/mf4z/eventure/repository/EventRepository.class

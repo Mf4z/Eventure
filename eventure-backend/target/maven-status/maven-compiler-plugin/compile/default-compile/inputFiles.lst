@@ -1,1 +1,14 @@
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/app/messages/EventDTO.java
 /Users/mac/Projects/Eventure/eventure-backend/src/main/java/org/example/Main.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/datamodel/Event.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/datamodel/Participant.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/controller/EventController.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/controller/ParticipantController.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/services/impl/ParticipantService.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/services/api/IEventDAO.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/services/impl/EventService.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/EventureApplication.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/repository/EventRepository.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/conf/ApplicationConfiguration.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/services/impl/DataService.java
+/Users/mac/Projects/Eventure/eventure-backend/src/main/java/com/mf4z/eventure/repository/ParticipantRepository.java
