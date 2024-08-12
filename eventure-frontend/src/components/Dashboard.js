@@ -1,7 +1,9 @@
 import React, { useEffect, useState } from "react";
-import axios from "axios";
 import { Link } from "react-router-dom";
-import "./Dashboard.css";
+import "../styles/Dashboard.css";
+
+// Import API functions from api.js
+import { getUserById, getTasksByUserId, getEventsByUserId } from "../api";
 
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
@@ -9,26 +11,29 @@ const Dashboard = () => {
   const [userName, setUserName] = useState("");
 
   useEffect(() => {
-    // Fetch user data (assuming the user ID is stored in local storage after login)
-    const userId = localStorage.getItem("userId");
-    axios
-      .get(`/api/users/${userId}`)
-      .then((response) => {
-        setUserName(response.data.name);
-      })
-      .catch((error) => console.error("Error fetching user data:", error));
+    const fetchData = async () => {
+      try {
+        const userId = localStorage.getItem("userId");
 
-    // Fetch upcoming events
-    axios
-      .get("/api/events/upcoming")
-      .then((response) => setEvents(response.data))
-      .catch((error) => console.error("Error fetching events:", error));
+        // Fetch user data by ID
+        const user = await getUserById(userId);
+        if (user) {
+          setUserName(user.name);
+        }
 
-    // Fetch tasks for the user
-    axios
-      .get(`/api/tasks/user/${userId}`)
-      .then((response) => setTasks(response.data))
-      .catch((error) => console.error("Error fetching tasks:", error));
+        // Fetch upcoming events for the user
+        const eventsData = await getEventsByUserId(userId);
+        setEvents(eventsData);
+
+        // Fetch tasks for the user
+        const tasksData = await getTasksByUserId(userId);
+        setTasks(tasksData);
+      } catch (error) {
+        console.error("Error fetching data:", error);
+      }
+    };
+
+    fetchData();
   }, []);
 
   return (
@@ -51,7 +56,7 @@ const Dashboard = () => {
           <h2>Upcoming Events</h2>
           {events.length > 0 ? (
             events.map((event) => (
-              <p key={event._id}>
+              <p key={event.id}>
                 Event: {event.event_name} - Date: {event.event_date}
               </p>
             ))

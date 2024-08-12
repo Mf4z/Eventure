@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./Profile.css";
+import "../styles/Profile.css";
 
 const Profile = () => {
   const [user, setUser] = useState({});
@@ -13,7 +13,7 @@ const Profile = () => {
   useEffect(() => {
     const userId = localStorage.getItem("userId");
     axios
-      .get(`/api/users/${userId}`)
+      .get(`http://localhost:5000/api/users/${userId}`) // Update this line
       .then((response) => {
         setUser(response.data);
         setName(response.data.name);
@@ -26,7 +26,7 @@ const Profile = () => {
   const handleSave = () => {
     const updatedUser = { ...user, name, email, contact };
     axios
-      .put(`/api/users/${user._id}`, updatedUser)
+      .put(`http://localhost:5000/api/users/${user._id}`, updatedUser) // Update this line
       .then((response) => {
         setUser(response.data);
         setIsEditing(false);

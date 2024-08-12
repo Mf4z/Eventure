@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios from "axios";
-import "./EventDetails.css";
+import "../styles/EventDetails.css";
 
 const EventDetails = () => {
   const { eventId } = useParams();

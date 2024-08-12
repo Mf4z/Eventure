@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import axios from "axios";
-import "./EventCreate.css";
+import "../styles/EventCreate.css";
 
 const EventCreate = () => {
   const [eventName, setEventName] = useState("");
