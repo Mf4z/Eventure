@@ -7,6 +7,7 @@ const cors = require("cors");
 // Load environment variables from .env file
 dotenv.config();
 
+const authRoutes = require("./routes/authRoutes"); // Import the auth routes
 const taskRoutes = require("./routes/taskRoutes");
 const userRoutes = require("./routes/userRoutes");
 
@@ -17,6 +18,7 @@ app.use(cors());
 app.use(bodyParser.json());
 
 // Routes
+app.use("/api/auth", authRoutes); // Auth routes
 app.use("/api/tasks", taskRoutes);
 app.use("/api/users", userRoutes);
 

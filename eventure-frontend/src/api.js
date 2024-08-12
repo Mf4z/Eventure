@@ -36,6 +36,20 @@ export const createUser = async (userData) => {
   }
 };
 
+// Auth API for login
+export const loginUser = async (email, password) => {
+  try {
+    const response = await axios.post(`${NODE_API_URL}/auth/login`, {
+      email,
+      password,
+    });
+    return response.data;
+  } catch (error) {
+    console.error("Error logging in:", error);
+    throw error;
+  }
+};
+
 export const getTasks = async () => {
   try {
     const response = await axios.get(`${NODE_API_URL}/tasks`);
