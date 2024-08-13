@@ -10,8 +10,8 @@ import Dashboard from "./components/Dashboard";
 import EventCreate from "./components/EventCreate";
 import EventDetails from "./components/EventDetails";
 import TaskCreate from "./components/TaskCreate";
+import Login from "./components/Login";
 import Profile from "./pages/Profile";
-import Login from "./pages/Login";
 import "./styles/App.css";
 
 const App = () => {
