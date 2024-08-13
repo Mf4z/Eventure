@@ -26,6 +26,11 @@ public class EventService {
         return eventRepository.findById(id);
     }
 
+    public List<Event> getEventsByUserId(String userId) {
+        // Assuming the Event entity has a field 'organiser' or similar referencing the user
+        return eventRepository.findByOrganiser(userId);
+    }
+
     public Event createEvent(Event event) {
         return eventRepository.save(event);
     }

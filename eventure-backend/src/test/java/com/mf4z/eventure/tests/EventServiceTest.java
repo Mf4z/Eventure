@@ -52,4 +52,25 @@ public class EventServiceTest {
         assertTrue(foundEvent.isPresent());
         assertEquals("Sample Event", foundEvent.get().getEventName());
     }
+
+    @Test
+    public void testGetEventsByUserId() {
+        String userId = "testUserId";
+
+        Event event1 = new Event();
+        event1.setEventName("Sample Event 1");
+        event1.setOrganiser(userId);
+
+        Event event2 = new Event();
+        event2.setEventName("Sample Event 2");
+        event2.setOrganiser(userId);
+
+        when(eventRepository.findByOrganiser(userId)).thenReturn(List.of(event1, event2));
+
+        List<Event> events = eventService.getEventsByUserId(userId);
+
+        assertEquals(2, events.size());
+        assertEquals("Sample Event 1", events.get(0).getEventName());
+        assertEquals("Sample Event 2", events.get(1).getEventName());
+    }
 }

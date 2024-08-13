@@ -31,7 +31,17 @@ public class EventController {
         return event.map(ResponseEntity::ok).orElseGet(() -> ResponseEntity.notFound().build());
     }
 
-    
+    @GetMapping("/user/{userId}")
+    public ResponseEntity<List<Event>> getEventsByUserId(@PathVariable String userId) {
+        List<Event> events = eventService.getEventsByUserId(userId); // Assume eventService is your service layer
+
+        if (events == null || events.isEmpty()) {
+            return ResponseEntity.notFound().build(); // Or return an empty list with ResponseEntity.ok(events);
+        }
+
+        return ResponseEntity.ok(events);
+    }
+
     @PostMapping
     public ResponseEntity<Event> createEvent(@RequestBody Event event) {
         return ResponseEntity.ok(eventService.createEvent(event));

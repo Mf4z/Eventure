@@ -53,4 +53,26 @@ public class EventControllerTest {
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("Sample Event", response.getBody().getEventName());
     }
+
+    @Test
+    public void testGetEventsByUserId() {
+        String userId = "testUserId";
+
+        Event event1 = new Event();
+        event1.setEventName("Sample Event 1");
+        event1.setOrganiser(userId);
+
+        Event event2 = new Event();
+        event2.setEventName("Sample Event 2");
+        event2.setOrganiser(userId);
+
+        when(eventService.getEventsByUserId(userId)).thenReturn(List.of(event1, event2));
+
+        ResponseEntity<List<Event>> response = eventController.getEventsByUserId(userId);
+
+        assertEquals(200, response.getStatusCodeValue());
+        assertEquals(2, response.getBody().size());
+        assertEquals("Sample Event 1", response.getBody().get(0).getEventName());
+        assertEquals("Sample Event 2", response.getBody().get(1).getEventName());
+    }
 }
