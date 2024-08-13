@@ -1,34 +1,28 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
 import "../styles/Dashboard.css";
-
-// Import API functions from api.js
 import { getUserById, getTasksByUserId, getEventsByUserId } from "../api";
 
 const Dashboard = () => {
   const [events, setEvents] = useState([]);
   const [tasks, setTasks] = useState([]);
   const [userName, setUserName] = useState("");
+  const [error, setError] = useState("");
 
   useEffect(() => {
     const fetchData = async () => {
       try {
         const userId = localStorage.getItem("userId");
-
-        // Fetch user data by ID
         const user = await getUserById(userId);
         if (user) {
           setUserName(user.name);
         }
-
-        // Fetch upcoming events for the user
         const eventsData = await getEventsByUserId(userId);
         setEvents(eventsData);
-
-        // Fetch tasks for the user
         const tasksData = await getTasksByUserId(userId);
         setTasks(tasksData);
       } catch (error) {
+        setError("Failed to load data. Please try again later.");
         console.error("Error fetching data:", error);
       }
     };
@@ -46,6 +40,7 @@ const Dashboard = () => {
         <Link to="/login">Logout</Link>
       </div>
       <div className="container">
+        {error && <div className="error-message">{error}</div>}
         <div className="dashboard-header">
           <h1>Welcome, {userName}</h1>
           <Link to="/create-event" className="button">

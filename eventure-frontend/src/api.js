@@ -5,6 +5,21 @@ const NODE_API_URL =
 const SPRING_API_URL =
   process.env.REACT_APP_SPRING_API_URL || "http://localhost:8080/api";
 
+// Auth API for login
+export const loginUser = async (email, password) => {
+  try {
+    const response = await axios.post(`${NODE_API_URL}/auth/login`, {
+      email,
+      password,
+    });
+    console.log("Login response:", response.data); // Add this to see the response in the console
+    return response.data;
+  } catch (error) {
+    console.error("Error logging in:", error);
+    throw error;
+  }
+};
+
 // Node.js API for Users and Tasks
 export const getUsers = async () => {
   try {
@@ -32,20 +47,6 @@ export const createUser = async (userData) => {
     return response.data;
   } catch (error) {
     console.error("Error creating user:", error);
-    throw error;
-  }
-};
-
-// Auth API for login
-export const loginUser = async (email, password) => {
-  try {
-    const response = await axios.post(`${NODE_API_URL}/auth/login`, {
-      email,
-      password,
-    });
-    return response.data;
-  } catch (error) {
-    console.error("Error logging in:", error);
     throw error;
   }
 };
