@@ -17,8 +17,16 @@ const Dashboard = () => {
         if (user) {
           setUserName(user.name);
         }
+        // const eventsData = await getEventsByUserId(userId);
+        // setEvents(eventsData);
         const eventsData = await getEventsByUserId(userId);
-        setEvents(eventsData);
+        if (Array.isArray(eventsData)) {
+          setEvents(eventsData);
+        } else {
+          console.error("Unexpected events data:", eventsData);
+          setEvents([]); // Set to empty array if not an array
+        }
+
         const tasksData = await getTasksByUserId(userId);
         setTasks(tasksData);
       } catch (error) {
