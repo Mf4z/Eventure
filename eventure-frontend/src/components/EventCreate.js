@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import { getUsers, createEvent } from "../api"; // Importing from api.js
+import { getUsers, getParticipants, createEvent } from "../api"; // Importing from api.js
 import "../styles/EventCreate.css";
 
 const EventCreate = () => {
@@ -11,6 +11,7 @@ const EventCreate = () => {
   const [responsible, setResponsible] = useState("");
   const [participants, setParticipants] = useState([]);
   const [users, setUsers] = useState([]);
+  const [availableParticipants, setAvailableParticipants] = useState([]);
   const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
@@ -18,6 +19,10 @@ const EventCreate = () => {
     getUsers()
       .then((data) => setUsers(data))
       .catch((error) => console.error("Error fetching users:", error));
+
+    getParticipants()
+      .then((data) => setAvailableParticipants(data))
+      .catch((error) => console.error("Error fetching participants:", error));
   }, []);
 
   const handleSubmit = (e) => {
@@ -108,7 +113,7 @@ const EventCreate = () => {
               ></textarea>
             </div>
             <div className="form-field">
-              <label htmlFor="eventResponsible">Event Responsible</label>
+              <label htmlFor="eventResponsible">Responsible for Event</label>
               <select
                 id="eventResponsible"
                 value={responsible}
@@ -138,9 +143,9 @@ const EventCreate = () => {
                   )
                 }
               >
-                {users.map((user) => (
-                  <option key={user._id} value={user._id}>
-                    {user.name}
+                {availableParticipants.map((participant) => (
+                  <option key={participant._id} value={participant._id}>
+                    {participant.name}
                   </option>
                 ))}
               </select>
