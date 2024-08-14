@@ -18,10 +18,10 @@ public class TestEventModel {
     private static final Logger LOGGER = LogManager.getLogger(TestEventModel.class);
 
     @Autowired
-    IEventDAO eventDAO;
+    private IEventDAO eventDAO;
 
     @Test
-    public void testEventCreation() throws Exception {
+    public void testEventCreation() {
         // Given
         Event event = new Event();
         event.setEventName("Sample Event");
@@ -33,6 +33,6 @@ public class TestEventModel {
         // Then
         Event readEvent = eventDAO.findById(event.getId()).orElse(null);
         Assertions.assertNotNull(readEvent);
-        Assertions.assertEquals(readEvent.getEventName(), event.getEventName());
+        Assertions.assertEquals("Sample Event", readEvent.getEventName());
     }
 }

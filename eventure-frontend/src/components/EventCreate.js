@@ -22,17 +22,19 @@ const EventCreate = () => {
   const handleSubmit = (e) => {
     e.preventDefault();
     const newEvent = {
-      event_name: eventName,
-      event_date: eventDate,
-      location: location,
-      event_description: description,
-      organiser: responsible,
-      participants: participants.map((id) => ({ participant_id: id })),
+      eventName, // Assuming camelCase is used in your backend
+      eventDate,
+      location,
+      eventDescription: description, // Match with backend naming convention
+      organiser: responsible, // Assuming this is the user ID of the organiser
+      participants: participants.map((id) => ({ participantId: id })), // Assuming this is how participants are stored
     };
+
     axios
       .post("/api/events", newEvent)
       .then((response) => {
         console.log("Event created:", response.data);
+        // Reset the form after successful creation
         setEventName("");
         setEventDate("");
         setLocation("");
@@ -105,6 +107,7 @@ const EventCreate = () => {
                 onChange={(e) => setResponsible(e.target.value)}
                 required
               >
+                <option value="">Select organiser</option>
                 {users.map((user) => (
                   <option key={user._id} value={user._id}>
                     {user.name}

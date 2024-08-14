@@ -3,6 +3,7 @@ package com.mf4z.eventure.tests;
 import com.mf4z.eventure.controller.EventController;
 import com.mf4z.eventure.datamodel.Event;
 import com.mf4z.eventure.services.impl.EventService;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -42,13 +43,14 @@ public class EventControllerTest {
 
     @Test
     public void testGetEventById() {
+        ObjectId eventId = new ObjectId();  // Create an ObjectId
         Event event = new Event();
-        event.setId("1");
+        event.setId(String.valueOf(eventId));  // Set ObjectId
         event.setEventName("Sample Event");
 
-        when(eventService.getEventById("1")).thenReturn(Optional.of(event));
+        when(eventService.getEventById(eventId.toHexString())).thenReturn(Optional.of(event)); // Convert ObjectId to String
 
-        ResponseEntity<Event> response = eventController.getEventById("1");
+        ResponseEntity<Event> response = eventController.getEventById(eventId.toHexString());
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("Sample Event", response.getBody().getEventName());
@@ -56,7 +58,7 @@ public class EventControllerTest {
 
     @Test
     public void testGetEventsByUserId() {
-        String userId = "testUserId";
+        ObjectId userId = new ObjectId();  // Create an ObjectId for the organiser
 
         Event event1 = new Event();
         event1.setEventName("Sample Event 1");
@@ -66,9 +68,9 @@ public class EventControllerTest {
         event2.setEventName("Sample Event 2");
         event2.setOrganiser(userId);
 
-        when(eventService.getEventsByUserId(userId)).thenReturn(List.of(event1, event2));
+        when(eventService.getEventsByUserId(userId.toHexString())).thenReturn(List.of(event1, event2)); // Convert ObjectId to String
 
-        ResponseEntity<List<Event>> response = eventController.getEventsByUserId(userId);
+        ResponseEntity<List<Event>> response = eventController.getEventsByUserId(userId.toHexString());
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals(2, response.getBody().size());

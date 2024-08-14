@@ -1,31 +1,31 @@
 package com.mf4z.eventure.datamodel;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.util.List;
 
-
 @Document(collection = "events")
 public class Event {
     @Id
-    private String id;
+    private ObjectId id;  // Change the id type to ObjectId
     private String eventName;
     private String eventDate;
     private String createdAt;
     private String location;
     private String eventDescription;
-    private String organiser;  // This is the user ID as a string
+    private ObjectId organiser;  // Organiser is also an ObjectId
     private List<Participant> participants;
 
     // Getters and Setters
 
     public String getId() {
-        return id;
+        return id.toHexString(); // Convert ObjectId to String
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = new ObjectId(id); // Convert String to ObjectId
     }
 
     public String getEventName() {
@@ -68,11 +68,11 @@ public class Event {
         this.eventDescription = eventDescription;
     }
 
-    public String getOrganiser() {
+    public ObjectId getOrganiser() {
         return organiser;
     }
 
-    public void setOrganiser(String organiser) {
+    public void setOrganiser(ObjectId organiser) {
         this.organiser = organiser;
     }
 
@@ -83,17 +83,4 @@ public class Event {
     public void setParticipants(List<Participant> participants) {
         this.participants = participants;
     }
-
-    public static class Participant {
-        private String participantId;
-
-        public String getParticipantId() {
-            return participantId;
-        }
-
-        public void setParticipantId(String participantId) {
-            this.participantId = participantId;
-        }
-    }
-
 }

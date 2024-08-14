@@ -3,6 +3,7 @@ package com.mf4z.eventure.tests;
 import com.mf4z.eventure.datamodel.Event;
 import com.mf4z.eventure.repository.EventRepository;
 import com.mf4z.eventure.services.impl.EventService;
+import org.bson.types.ObjectId;  // Import ObjectId
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -41,13 +42,14 @@ public class EventServiceTest {
 
     @Test
     public void testGetEventById() {
+        ObjectId eventId = new ObjectId();  // Create an ObjectId
         Event event = new Event();
-        event.setId("1");
+        event.setId(String.valueOf(eventId));  // Set ObjectId
         event.setEventName("Sample Event");
 
-        when(eventRepository.findById("1")).thenReturn(Optional.of(event));
+        when(eventRepository.findById(eventId)).thenReturn(Optional.of(event)); // Use ObjectId directly
 
-        Optional<Event> foundEvent = eventService.getEventById("1");
+        Optional<Event> foundEvent = eventService.getEventById(eventId.toHexString()); // Convert ObjectId to String
 
         assertTrue(foundEvent.isPresent());
         assertEquals("Sample Event", foundEvent.get().getEventName());
@@ -55,7 +57,7 @@ public class EventServiceTest {
 
     @Test
     public void testGetEventsByUserId() {
-        String userId = "testUserId";
+        ObjectId userId = new ObjectId();  // Create an ObjectId for the organiser
 
         Event event1 = new Event();
         event1.setEventName("Sample Event 1");
@@ -65,9 +67,9 @@ public class EventServiceTest {
         event2.setEventName("Sample Event 2");
         event2.setOrganiser(userId);
 
-        when(eventRepository.findByOrganiser(userId)).thenReturn(List.of(event1, event2));
+        when(eventRepository.findByOrganiser(userId)).thenReturn(List.of(event1, event2)); // Use ObjectId
 
-        List<Event> events = eventService.getEventsByUserId(userId);
+        List<Event> events = eventService.getEventsByUserId(userId.toHexString()); // Convert ObjectId to String
 
         assertEquals(2, events.size());
         assertEquals("Sample Event 1", events.get(0).getEventName());

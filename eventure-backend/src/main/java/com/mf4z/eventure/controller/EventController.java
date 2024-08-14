@@ -2,6 +2,7 @@ package com.mf4z.eventure.controller;
 
 import com.mf4z.eventure.datamodel.Event;
 import com.mf4z.eventure.services.impl.EventService;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,12 +34,10 @@ public class EventController {
 
     @GetMapping("/user/{userId}")
     public ResponseEntity<List<Event>> getEventsByUserId(@PathVariable String userId) {
-        List<Event> events = eventService.getEventsByUserId(userId); // Assume eventService is your service layer
-
-        if (events == null || events.isEmpty()) {
-            return ResponseEntity.notFound().build(); // Or return an empty list with ResponseEntity.ok(events);
+        List<Event> events = eventService.getEventsByUserId(userId);
+        if (events.isEmpty()) {
+            return ResponseEntity.notFound().build();
         }
-
         return ResponseEntity.ok(events);
     }
 
