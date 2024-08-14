@@ -1,5 +1,6 @@
 package com.mf4z.eventure.datamodel;
 
+import org.bson.types.ObjectId;
 import org.springframework.data.mongodb.core.mapping.Document;
 import org.springframework.data.annotation.Id;
 
@@ -7,7 +8,7 @@ import org.springframework.data.annotation.Id;
 public class Participant {
 
     @Id
-    private String id;
+    private ObjectId id;
     private String name;
     private String email;
     private String contact;
@@ -15,13 +16,12 @@ public class Participant {
     // Getters and Setters
 
     public String getId() {
-        return id;
+        return id != null ? id.toHexString() : null;  // Convert ObjectId to String
     }
 
     public void setId(String id) {
-        this.id = id;
+        this.id = new ObjectId(id);  // Convert String to ObjectId
     }
-
     public String getName() {
         return name;
     }

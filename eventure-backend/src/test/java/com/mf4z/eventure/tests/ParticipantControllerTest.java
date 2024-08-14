@@ -3,6 +3,7 @@ package com.mf4z.eventure.tests;
 import com.mf4z.eventure.controller.ParticipantController;
 import com.mf4z.eventure.datamodel.Participant;
 import com.mf4z.eventure.services.impl.ParticipantService;
+import org.bson.types.ObjectId;
 import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
@@ -43,13 +44,14 @@ public class ParticipantControllerTest {
 
     @Test
     public void testGetParticipantById() {
+        ObjectId participantId = new ObjectId(); // Generate a new ObjectId
         Participant participant = new Participant();
-        participant.setId("1");
+        participant.setId(participantId.toHexString());
         participant.setName("John Doe");
 
-        when(participantService.getParticipantById("1")).thenReturn(Optional.of(participant));
+        when(participantService.getParticipantById(participantId.toHexString())).thenReturn(Optional.of(participant));
 
-        ResponseEntity<Participant> response = participantController.getParticipantById("1");
+        ResponseEntity<Participant> response = participantController.getParticipantById(participantId.toHexString());
 
         assertEquals(200, response.getStatusCodeValue());
         assertEquals("John Doe", response.getBody().getName());

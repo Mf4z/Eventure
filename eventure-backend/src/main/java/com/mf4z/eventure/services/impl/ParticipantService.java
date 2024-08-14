@@ -2,6 +2,7 @@ package com.mf4z.eventure.services.impl;
 
 import com.mf4z.eventure.datamodel.Participant;
 import com.mf4z.eventure.repository.ParticipantRepository;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,7 +25,7 @@ public class ParticipantService {
 
     public Optional<Participant> getParticipantById(String id) {
         logger.debug("Fetching participant with id: {}", id);
-        return participantRepository.findById(id);
+        return participantRepository.findById(new ObjectId(id));
     }
 
     public Participant createParticipant(Participant participant) {
@@ -34,7 +35,7 @@ public class ParticipantService {
 
     public Participant updateParticipant(String id, Participant participantDetails) {
         logger.debug("Updating participant with id: {}", id);
-        Optional<Participant> optionalParticipant = participantRepository.findById(id);
+        Optional<Participant> optionalParticipant = participantRepository.findById(new ObjectId(id));
         if (optionalParticipant.isPresent()) {
             Participant participant = optionalParticipant.get();
             participant.setName(participantDetails.getName());
@@ -48,6 +49,6 @@ public class ParticipantService {
 
     public void deleteParticipant(String id) {
         logger.debug("Deleting participant with id: {}", id);
-        participantRepository.deleteById(id);
+        participantRepository.deleteById(new ObjectId(id));
     }
 }
