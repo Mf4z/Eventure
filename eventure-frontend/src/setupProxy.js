@@ -1,5 +1,7 @@
 const { createProxyMiddleware } = require("http-proxy-middleware");
 
+console.log("Proxy setup is being executed");
+
 module.exports = function (app) {
   // Proxy for Node.js backend (auth, users, tasks)
   app.use(
@@ -23,6 +25,9 @@ module.exports = function (app) {
     createProxyMiddleware({
       target: "http://localhost:5000",
       changeOrigin: true,
+      onProxyReq: (proxyReq, req, res) => {
+        console.log("Proxying request:", req.url);
+      },
     })
   );
 

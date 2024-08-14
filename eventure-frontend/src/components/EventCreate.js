@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
-import axios from "axios";
+import { getUsers, createEvent } from "../api"; // Importing from api.js
 import "../styles/EventCreate.css";
 
 const EventCreate = () => {
@@ -13,27 +13,25 @@ const EventCreate = () => {
   const [users, setUsers] = useState([]);
 
   useEffect(() => {
-    axios
-      .get("/api/users")
-      .then((response) => setUsers(response.data))
+    getUsers()
+      .then((data) => setUsers(data))
       .catch((error) => console.error("Error fetching users:", error));
   }, []);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const newEvent = {
-      eventName, // Assuming camelCase is used in your backend
+      eventName,
       eventDate,
       location,
-      eventDescription: description, // Match with backend naming convention
-      organiser: responsible, // Assuming this is the user ID of the organiser
-      participants: participants.map((id) => ({ participantId: id })), // Assuming this is how participants are stored
+      eventDescription: description,
+      organiser: responsible,
+      participants: participants.map((id) => ({ participantId: id })),
     };
 
-    axios
-      .post("/api/events", newEvent)
+    createEvent(newEvent)
       .then((response) => {
-        console.log("Event created:", response.data);
+        console.log("Event created:", response);
         // Reset the form after successful creation
         setEventName("");
         setEventDate("");
