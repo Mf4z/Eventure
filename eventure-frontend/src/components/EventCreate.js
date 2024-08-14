@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUsers, createEvent } from "../api"; // Importing from api.js
 import "../styles/EventCreate.css";
 
@@ -11,6 +11,8 @@ const EventCreate = () => {
   const [responsible, setResponsible] = useState("");
   const [participants, setParticipants] = useState([]);
   const [users, setUsers] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUsers()
@@ -32,6 +34,7 @@ const EventCreate = () => {
     createEvent(newEvent)
       .then((response) => {
         console.log("Event created:", response);
+        setSuccessMessage("Event created successfully!"); // Set success message
         // Reset the form after successful creation
         setEventName("");
         setEventDate("");
@@ -39,6 +42,9 @@ const EventCreate = () => {
         setDescription("");
         setResponsible("");
         setParticipants([]);
+
+        // Redirect to dashboard
+        navigate("/dashboard");
       })
       .catch((error) => console.error("Error creating event:", error));
   };
@@ -56,6 +62,10 @@ const EventCreate = () => {
         <div className="form-header">
           <h1>Create New Event</h1>
         </div>
+        {/* Display success message */}
+        {successMessage && (
+          <div className="success-message">{successMessage}</div>
+        )}
         <div className="form-section">
           <form onSubmit={handleSubmit}>
             <div className="form-field">
