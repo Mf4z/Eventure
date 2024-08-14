@@ -60,7 +60,8 @@ const Dashboard = () => {
           {events.length > 0 ? (
             events.map((event) => (
               <p key={event.id}>
-                Event: {event.event_name} - Date: {event.event_date}
+                Event: {event.eventName} - Date: {event.eventDate} - Location:{" "}
+                {event.location}
               </p>
             ))
           ) : (
