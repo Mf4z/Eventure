@@ -32,6 +32,16 @@ exports.getTaskById = async (req, res) => {
   }
 };
 
+// Get Tasks by User ID
+exports.getTasksByUserId = async (req, res) => {
+  try {
+    const tasks = await Task.find({ assignedTo: req.params.userId }); // Adjust the query as per your data model
+    res.status(200).json(tasks);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
 // Update a task
 exports.updateTask = async (req, res) => {
   try {
