@@ -12,14 +12,6 @@ module.exports = function (app) {
     })
   );
 
-  // app.use(
-  //   "/api/users",
-  //   createProxyMiddleware({
-  //     target: "http://localhost:5000",
-  //     changeOrigin: true,
-  //   })
-  // );
-
   // Proxy for the protected Users API
   app.use(
     "/api/users",
@@ -37,17 +29,6 @@ module.exports = function (app) {
     })
   );
 
-  // app.use(
-  //   "/api/tasks",
-  //   createProxyMiddleware({
-  //     target: "http://localhost:5000",
-  //     changeOrigin: true,
-  //     onProxyReq: (proxyReq, req, res) => {
-  //       console.log("Proxying request:", req.url);
-  //     },
-  //   })
-  // );
-
   // Proxy for the external tasks API
   app.use(
     "/api/tasks",
@@ -62,23 +43,6 @@ module.exports = function (app) {
       },
     })
   );
-
-  // Proxy for Spring Boot backend (events, participants)
-  // app.use(
-  //   "/api/events",
-  //   createProxyMiddleware({
-  //     target: "http://localhost:8080",
-  //     changeOrigin: true,
-  //   })
-  // );
-
-  // app.use(
-  //   "/api/participants",
-  //   createProxyMiddleware({
-  //     target: "http://localhost:8080",
-  //     changeOrigin: true,
-  //   })
-  // );
 
   // Proxy for the external events API
   app.use(
