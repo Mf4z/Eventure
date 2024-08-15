@@ -9,13 +9,13 @@ import java.util.List;
 @Document(collection = "events")
 public class Event {
     @Id
-    private ObjectId id;  // Change the id type to ObjectId
+    private ObjectId id;
     private String eventName;
     private String eventDate;
     private String createdAt;
     private String location;
     private String eventDescription;
-    private ObjectId organiser;  // Organiser is also an ObjectId
+    private ObjectId organiser;
     private List<Participant> participants;
 
     // Getters and Setters
