@@ -39,3 +39,7 @@ GET http://localhost:8090/apiman-gateway/Eventure-default/events/1.0
 ## Tasks API
 ### Get Tasks from the Public API v1.0
 GET http://localhost:8090/apiman-gateway/Eventure-default/tasks/1.0
+
+## Participants API
+### Get Participants from the Public API v1.0
+GET http://localhost:8090/apiman-gateway/Eventure-default/participants/1.0

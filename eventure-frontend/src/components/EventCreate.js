@@ -33,7 +33,7 @@ const EventCreate = () => {
       location,
       eventDescription: description,
       organiser: responsible,
-      participants: participants.map((id) => ({ participantId: id })),
+      participants: participants.map((id) => ({ id })), // Only send participant IDs
     };
 
     createEvent(newEvent)
@@ -67,7 +67,6 @@ const EventCreate = () => {
         <div className="form-header">
           <h1>Create New Event</h1>
         </div>
-        {/* Display success message */}
         {successMessage && (
           <div className="success-message">{successMessage}</div>
         )}

@@ -18,6 +18,11 @@ public class Participant {
     public String getId() {
         return id != null ? id.toHexString() : null;  // Convert ObjectId to String
     }
+    // New method to get the actual ObjectId
+    public ObjectId getObjectId() {
+        return id;
+    }
+
 
     public void setId(String id) {
         this.id = new ObjectId(id);  // Convert String to ObjectId

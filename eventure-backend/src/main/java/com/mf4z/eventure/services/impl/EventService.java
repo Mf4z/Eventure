@@ -1,13 +1,16 @@
 package com.mf4z.eventure.services.impl;
 
 import com.mf4z.eventure.datamodel.Event;
+import com.mf4z.eventure.datamodel.Participant;
 import com.mf4z.eventure.repository.EventRepository;
+import com.mf4z.eventure.repository.ParticipantRepository;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
@@ -18,6 +21,10 @@ public class EventService {
 
     @Autowired
     private EventRepository eventRepository;
+
+    @Autowired
+    private ParticipantRepository participantRepository;
+
 
     public List<Event> getAllEvents() {
         return eventRepository.findAll();
@@ -31,6 +38,17 @@ public class EventService {
         return eventRepository.findByOrganiser(new ObjectId(userId));
     }
     public Event createEvent(Event event) {
+        // Fetch and populate the full Participant objects based on their IDs
+        List<Participant> fullParticipants = new ArrayList<>();
+        for (Participant participant : event.getParticipants()) {
+            if (participant.getId() != null) {
+                Participant fullParticipant = participantRepository.findById(participant.getObjectId()).orElse(null);
+                if (fullParticipant != null) {
+                    fullParticipants.add(fullParticipant);
+                }
+            }
+        }
+        event.setParticipants(fullParticipants);
         return eventRepository.save(event);
     }
 

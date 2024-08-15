@@ -11,7 +11,6 @@ const TaskCreate = () => {
   const [eventId, setEventId] = useState("");
   const [users, setUsers] = useState([]);
   const [events, setEvents] = useState([]);
-  const [successMessage, setSuccessMessage] = useState("");
   const navigate = useNavigate();
 
   useEffect(() => {
@@ -37,7 +36,6 @@ const TaskCreate = () => {
     createTask(newTask)
       .then((response) => {
         console.log("Task created:", response.data);
-        setSuccessMessage("Task assigned successfully!"); // Set success message
         // Reset the form after successful creation
         setTitle("");
         setDescription("");
