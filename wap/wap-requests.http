@@ -1,6 +1,16 @@
 # Eventure APIs
 #*****************#
+
+## GET Tokens
+POST http://localhost:8090/auth/realms/Eventure-default/protocol/openid-connect/token
+Content-Type: application/x-www-form-urlencoded
+
+client_id=eventure-frontend&grant_type=password&username=marwan@eventure.com&password=1234
 ## Users API
+### Get Users from the Protected and Authorization API v1.1, Client v1.1
+GET http://localhost:8090/apiman-gateway/Eventure-default/users/1.1?apikey=e30ca901-a75d-4535-8e9c-b1cd7fca4fdb
+Authorization: Basic marwan@eventure.com 1234
+
 ### Get Users from the Protected API v1.1
 GET http://localhost:8090/apiman-gateway/Eventure-default/users/1.1?apikey=fcbdb367-bc05-4dc0-948a-bbe5c13ef115
 
