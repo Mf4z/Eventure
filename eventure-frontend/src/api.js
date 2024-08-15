@@ -102,6 +102,26 @@ export const getEventsByUserId = async (userId) => {
   }
 };
 
+export const getEventById = async (eventId) => {
+  try {
+    const response = await axios.get(`${SPRING_API_URL}/events/${eventId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error fetching event with ID ${eventId}:`, error);
+    throw error;
+  }
+};
+
+export const deleteEvent = async (eventId) => {
+  try {
+    const response = await axios.delete(`${SPRING_API_URL}/events/${eventId}`);
+    return response.data;
+  } catch (error) {
+    console.error(`Error deleting event with ID ${eventId}:`, error);
+    throw error;
+  }
+};
+
 export const createEvent = async (eventData) => {
   try {
     const response = await axios.post(`${SPRING_API_URL}/events`, eventData);

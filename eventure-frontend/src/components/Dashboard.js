@@ -17,8 +17,6 @@ const Dashboard = () => {
         if (user) {
           setUserName(user.name);
         }
-        // const eventsData = await getEventsByUserId(userId);
-        // setEvents(eventsData);
         const eventsData = await getEventsByUserId(userId);
         if (Array.isArray(eventsData)) {
           setEvents(eventsData);
@@ -60,8 +58,10 @@ const Dashboard = () => {
           {events.length > 0 ? (
             events.map((event) => (
               <p key={event.id}>
-                Event: {event.eventName} - Date: {event.eventDate} - Location:{" "}
-                {event.location}
+                <Link to={`/event-details/${event.id}`}>
+                  Event: {event.eventName} - Date: {event.eventDate} - Location:{" "}
+                  {event.location}
+                </Link>
               </p>
             ))
           ) : (
