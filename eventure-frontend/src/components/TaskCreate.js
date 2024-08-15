@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { getUsers, getEvents, createTask } from "../api";
 import "../styles/TaskCreate.css";
 
@@ -11,6 +11,8 @@ const TaskCreate = () => {
   const [eventId, setEventId] = useState("");
   const [users, setUsers] = useState([]);
   const [events, setEvents] = useState([]);
+  const [successMessage, setSuccessMessage] = useState("");
+  const navigate = useNavigate();
 
   useEffect(() => {
     getUsers()
@@ -35,12 +37,16 @@ const TaskCreate = () => {
     createTask(newTask)
       .then((response) => {
         console.log("Task created:", response.data);
+        setSuccessMessage("Task assigned successfully!"); // Set success message
         // Reset the form after successful creation
         setTitle("");
         setDescription("");
         setDeadline("");
         setAssigneeId("");
         setEventId("");
+
+        // Redirect to dashboard
+        navigate("/dashboard");
       })
       .catch((error) => console.error("Error creating task:", error));
   };

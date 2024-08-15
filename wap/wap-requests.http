@@ -1,0 +1,16 @@
+# Eventure APIs
+#*****************#
+## Users API
+### Get Users from the Protected API v1.1
+GET http://localhost:8090/apiman-gateway/Eventure-default/users/1.1?apikey=fcbdb367-bc05-4dc0-948a-bbe5c13ef115
+
+### Get Users from the Public API v1.0
+GET http://localhost:8090/apiman-gateway/Eventure-default/users/1.0
+
+## Events API
+### Get Events from the Public API v1.0
+GET http://localhost:8090/apiman-gateway/Eventure-default/events/1.0
+
+## Tasks API
+### Get Tasks from the Public API v1.0
+GET http://localhost:8090/apiman-gateway/Eventure-default/tasks/1.0
